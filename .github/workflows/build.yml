@@ -1,0 +1,59 @@
+name: build
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  xgo:
+    strategy:
+      fail-fast: false
+      matrix:
+        go_version:
+          - 1.13.x
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build with xgo
+        uses: crazy-max/ghaction-xgo@v1
+        with:
+          xgo_version: latest
+          go_version: ${{ matrix.go_version }}
+          pkg: src
+          dest: build
+          prefix: md2website
+          targets: windows/386,windows/amd64,linux/386,linux/amd64,darwin/386,darwin/amd64
+          v: true
+          x: false
+          race: false
+          ldflags: -s -w
+          buildmode: default
+
+      - name: cd build
+        run: cd build && ls
+
+      - name: chmod app
+        run: chmod 777 ./build/md2website-linux-amd64
+
+      - name: build doc
+        run: ./build/md2website-linux-amd64 -SourceDir ./test-doc/思源笔记用户指南 -OutDir ./outHTML -TemplateDir ./src/views/ -SqlitePath ./test-doc/siyuan.db
+
+      - name: zip views
+        run: zip -q -r ./build/views.zip ./src/views/
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: outHTML
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+      - name: Release apk
+        uses: ncipollo/release-action@v1.5.0
+        with:
+          artifacts: "build/*"
+          token: ${{ secrets.GIT_TOKEN }}
