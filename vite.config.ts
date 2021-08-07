@@ -9,7 +9,8 @@ const config: UserConfig = {
     }),
   ],
   server: {
-    hmr: false,
+    /** 调试 siyuan_cache_api_lib 时最好关掉，因为每次编译会导致 hmr 多次，我不太喜欢 */
+    // hmr: false,
     fs: {
       strict: false,
     },

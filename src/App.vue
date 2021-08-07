@@ -18,6 +18,7 @@ import { api, util, config as apiConfig } from "siyuan_api_cache_lib";
 if (import.meta.env.DEV) {
   apiConfig.server = "http://127.0.0.1:6806";
 }
+
 apiConfig.apiCache = true;
 const config = reactive({
   source: "",
@@ -47,21 +48,21 @@ onBeforeMount(async () => {
       .catch((e) => {
         console.error("查询config失败", e);
       });
+    // 保存 config 到本地
+    if (util.getCurrentEnv() === util.getCurrentEnv.env.siYuan) {
+      watchEffect(() => {
+        api
+          .setBlockAttrs({
+            id: util.currentNodeId()!,
+            attrs: { "custom-config": JSON.stringify(config) },
+          })
+          .then((r) => {
+            // console.log("保存成功", r);
+          });
+      });
+    }
   } else {
-    console.error("获取当前挂件快id失败");
-  }
-  // 保存 config 到本地
-  if (util.getCurrentEnv() === util.getCurrentEnv.env.siYuan) {
-    watchEffect(() => {
-      api
-        .setBlockAttrs({
-          id: util.currentNodeId()!,
-          attrs: { "custom-config": JSON.stringify(config) },
-        })
-        .then((r) => {
-          // console.log("保存成功", r);
-        });
-    });
+    console.error("获取当前挂件快id失败，不再尝试调用思源 api 保存代码");
   }
 });
 </script>

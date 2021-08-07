@@ -6,15 +6,21 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
+  "keywords": [
+    "siyuan",
+    "widgets"
+  ],
   "dependencies": {
+    "lz-string": "^1.4.4",
     "siyuan_api_cache_lib": "latest",
-    "vue": "^3.0.5"
+    "vue": "^3.1.5"
   },
   "devDependencies": {
+    "@types/lz-string": "^1.3.34",
     "@vitejs/plugin-legacy": "^1.5.1",
-    "@vitejs/plugin-vue": "^1.3.0",
-    "@vue/compiler-sfc": "^3.0.5",
-    "typescript": "^4.3.2",
+    "@vitejs/plugin-vue": "^1.4.0",
+    "@vue/compiler-sfc": "^3.1.5",
+    "typescript": "^4.3.5",
     "vite": "^2.4.4",
     "vue-tsc": "^0.2.2"
   }
