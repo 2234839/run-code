@@ -13,6 +13,8 @@ import runCodeVue from "./components/run-code.vue";
 import { reactive, onBeforeMount, watchEffect } from "vue";
 
 import { api, util, config as apiConfig } from "siyuan_api_cache_lib";
+import { useParamsObj } from "./util/use-url-params-obj";
+import LZString from "lz-string";
 
 // 非开发模式下不用设定 server，使用相对路径来指向 思源server
 if (import.meta.env.DEV) {
@@ -30,6 +32,18 @@ const config = reactive({
 
 onBeforeMount(async () => {
   const id = util.currentNodeId();
+  // 从 url 获取 config，以及将 config 保存至 url
+  const [AppOptions, href] = useParamsObj(undefined, { code: "{}" });
+  watchEffect(() => history.pushState("", "", href.value));
+
+  Object.assign(
+    config,
+    JSON.parse(LZString.decompressFromBase64(AppOptions.code) || "{}")
+  );
+  watchEffect(() => {
+    AppOptions.code = LZString.compressToBase64(JSON.stringify(config));
+  });
+
   // 从本地获取 config 的值
   if (id) {
     api
