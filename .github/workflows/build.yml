@@ -48,9 +48,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
 
       - name: zip
-        run: zip -q -r ./release/run-code.zip ./dist/
+        run: zip -q -r ./dist/run-code.zip ./dist/
       - name: Release
         uses: ncipollo/release-action@v1.5.0
         with:
-          artifacts: "release/*"
+          artifacts: "release/*.zip"
           token: ${{ secrets.GIT_TOKEN }}
