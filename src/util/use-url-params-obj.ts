@@ -5,7 +5,7 @@ import { reactive, computed } from "vue";
  * ```js
  *   const [AppOptions, href] = useParamsObj(undefined, {});
  *   // 将基于 AppOptions 计算得来的 href 设置到 history
- *   watchEffect(() => history.pushState("", "", href.value));
+ *   watchEffect(() => history.replaceState("", "", href.value));
  * ```
  */
 export function useParamsObj<T extends object>(

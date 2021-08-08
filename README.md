@@ -6,5 +6,5 @@
 
 ## 快速开始
 
-- 在这里 <https://github.com/2234839/run-code/releases> 下载挂件块的代码解压后放到 siyuan 的 widgets 目录下
+- 在这里 <./releases> 下载挂件块的代码解压后放到 SiYuan 的 widgets 目录下
 - 在思源内创建一个 iframe 资源地址填 `/widgets/run-code/index.html` 即可
