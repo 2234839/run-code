@@ -53,4 +53,5 @@ jobs:
         uses: ncipollo/release-action@v1.5.0
         with:
           artifacts: "dist/*.zip"
+          bodyFile: "release.md"
           token: ${{ secrets.GIT_TOKEN }}
