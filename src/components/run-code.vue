@@ -1,10 +1,20 @@
 <template>
-  <pre class="embed" :data-gutter="inside"><div ref="element"></div> </pre>
+  <PrismJs v-if="loading" :source="source"></PrismJs>
+  <RunKit
+    v-model:source="source"
+    v-model:inside="inside"
+    v-model:title="title"
+    v-model:preamble="preamble"
+    v-model:version="version"
+    @update:loading="(b) => (loading = b)"
+  ></RunKit>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watchEffect, computed, toRefs } from "vue";
 import type { PropType } from "vue";
+import { ref } from "vue";
+import PrismJs from "./code-editor/prismjs.vue";
+import RunKit from "./code-editor/RunKit.vue";
 import { propsToRefs } from "./props-to-refs";
 const props = defineProps({
   inside: {
@@ -37,48 +47,7 @@ const emit = defineEmits([
   "update:version",
 ]);
 const { inside, source, title, preamble, version } = propsToRefs(props, emit);
-const element = ref<HTMLElement | null>(null);
-const nodeVersion = computed({
-  get() {
-    //   run-kit 的 setNodeVersion 似乎只接受这种形式的输入
-    return version!
-      .value!.trim()
-      .split(".")
-      .map((v, index) => {
-        if (index === 0) {
-          return v;
-        } else {
-          return "x";
-        }
-      })
-      .join(".");
-  },
-  set(v: string) {
-    version!.value = v;
-  },
-});
-onMounted(async () => {
-  const cell = window.RunKit.createNotebook({
-    element: element.value! as HTMLElement,
-    preamble: preamble!.value,
-    title: title!.value,
-    gutterStyle: inside.value,
-    source: source!.value,
-    nodeVersion: nodeVersion.value,
-  });
 
-  cell.onLoad = async (book) => {
-    cell.evaluate();
-  };
-
-  // 各种属性的绑定
-  cell.onSave = async () => {
-    cell.getSource().then((v) => (source!.value = v));
-    cell.getNodeVersion().then((v) => (nodeVersion.value = v));
-  };
-  watchEffect(() => cell.setSource(source!.value!));
-  watchEffect(() => cell.setTitle(title!.value!));
-  watchEffect(() => cell.setPreamble(preamble!.value!));
-  watchEffect(() => cell.setNodeVersion(nodeVersion.value));
-});
+/** 在其他编辑组件加载完毕后隐藏默认组件 */
+const loading = ref(true);
 </script>

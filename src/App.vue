@@ -1,5 +1,5 @@
 <template>
-  <runCodeVue
+  <RunCodeVue
     v-model:source="config.source"
     v-model:inside="config.inside"
     v-model:title="config.title"
@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import runCodeVue from "./components/run-code.vue";
+import RunCodeVue from "./components/run-code.vue";
 import { reactive, onBeforeMount, watchEffect } from "vue";
 
 import { api, util, config as apiConfig } from "siyuan_api_cache_lib";
