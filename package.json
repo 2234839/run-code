@@ -1,15 +1,20 @@
 {
   "name": "run-code",
-  "version": "1.0.0",
+  "author": "崮生",
+  "version": "v1.1.3",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite build && node ./widgets.json.js",
     "serve": "vite preview"
   },
   "keywords": [
     "siyuan",
     "widgets"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2234839/run-code.git"
+  },
   "dependencies": {
     "lz-string": "^1.4.4",
     "prismjs": "^1.24.1",
