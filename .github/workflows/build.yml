@@ -44,6 +44,7 @@ jobs:
         with:
           target_branch: gh-pages
           build_dir: dist
+          keep_history: true
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
 
@@ -52,7 +53,6 @@ jobs:
       - name: Release
         uses: ncipollo/release-action@v1.5.0
         with:
-          allowUpdates: true
           artifacts: "dist/*.zip"
           bodyFile: "release.md"
           token: ${{ secrets.GIT_TOKEN }}

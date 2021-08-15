@@ -1,7 +1,7 @@
 {
   "name": "run-code",
   "author": "崮生",
-  "version": "v1.1.4",
+  "version": "v1.1.5",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build && node ./widgets.json.js",
