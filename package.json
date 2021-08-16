@@ -4,7 +4,7 @@
   "version": "v1.1.5",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build && node ./widgets.json.js",
+    "build": "vue-tsc --noEmit && vite build && node ./widget.json.js",
     "serve": "vite preview"
   },
   "keywords": [
