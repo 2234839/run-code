@@ -46,7 +46,8 @@ onBeforeMount(async () => {
 
   // 从本地获取 config 的值
   if (id) {
-    api
+    // 此 await 用于避免下面的 `保存 config 到本地` 先于查询执行
+    await api
       .getBlockAttr(id, "custom-config")
       .then((r) => {
         if (r) {
@@ -80,3 +81,8 @@ onBeforeMount(async () => {
   }
 });
 </script>
+<style global>
+body::-webkit-scrollbar {
+  display: none;
+}
+</style>
