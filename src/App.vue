@@ -24,7 +24,14 @@
 
 <script lang="ts" setup>
 import RunCodeVue from "./components/run-code.vue";
-import { reactive, onBeforeMount, watchEffect, ref, computed } from "vue";
+import {
+  reactive,
+  onBeforeMount,
+  watchEffect,
+  ref,
+  computed,
+  watch,
+} from "vue";
 
 import { api, util, config as apiConfig } from "siyuan_api_cache_lib";
 import { useParamsObj } from "./util/use-url-params-obj";
@@ -99,10 +106,7 @@ onBeforeMount(async () => {
     });
     // 保存 config 到本地
     if (util.getCurrentEnv() === util.getCurrentEnv.env.siYuan) {
-      watchEffect(() => {
-        config;
-        setConfig$.value.reLoad();
-      });
+      watch(config, () => setConfig$.value.reLoad());
     }
   } else {
     console.error("获取当前挂件快id失败，不再尝试调用思源 api 保存代码");
@@ -112,5 +116,8 @@ onBeforeMount(async () => {
 <style global>
 body::-webkit-scrollbar {
   display: none;
+}
+body {
+  scrollbar-width: none;
 }
 </style>
