@@ -1,10 +1,10 @@
 {
   "name": "run-code",
   "author": "崮生",
-  "version": "v1.1.7",
+  "version": "v1.1.8",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build && node ./widget.json.js",
+    "build": "vite build && node ./widget.json.js",
     "serve": "vite preview"
   },
   "keywords": [
@@ -16,19 +16,18 @@
     "url": "https://github.com/2234839/run-code.git"
   },
   "dependencies": {
-    "lz-string": "^1.4.4",
-    "prismjs": "^1.24.1",
+    "lz-string": "^1.5.0",
+    "prismjs": "^1.29.0",
     "siyuan_api_cache_lib": "^1.0.7",
-    "vue": "^3.2.8"
+    "vue": "^3.4.27"
   },
   "devDependencies": {
-    "@types/lz-string": "^1.3.34",
-    "@types/prismjs": "^1.16.6",
-    "@vitejs/plugin-legacy": "^1.5.2",
-    "@vitejs/plugin-vue": "^1.6.0",
-    "@vue/compiler-sfc": "^3.2.8",
-    "typescript": "^4.4.2",
-    "vite": "^2.5.3",
-    "vue-tsc": "^0.2.3"
+    "@types/lz-string": "^1.5.0",
+    "@types/prismjs": "^1.26.4",
+    "@vitejs/plugin-legacy": "^1.8.2",
+    "@vitejs/plugin-vue": "^1.10.2",
+    "@vue/compiler-sfc": "^3.4.27",
+    "typescript": "^4.9.5",
+    "vite": "^2.9.18"
   }
 }

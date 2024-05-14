@@ -80,6 +80,7 @@ onBeforeMount(async () => {
   const id = util.currentNodeId();
   // 从 url 获取 config，以及将 config 保存至 url
   const [AppOptions, href] = useParamsObj(undefined, { code: "{}" });
+
   watchEffect(() => history.replaceState("", "", href.value));
 
   Object.assign(

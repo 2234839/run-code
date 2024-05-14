@@ -15,3 +15,7 @@
 
 - 在这里 [./releases](./releases) 下载挂件块的代码解压后放到 SiYuan 的 widgets 目录下
 - 在思源内创建一个 iframe 资源地址填 `/widgets/run-code/index.html` 即可
+
+## 开发者相关
+
+本项目为标准npm包，通过命令`pnpm build`构建为思源挂件包
