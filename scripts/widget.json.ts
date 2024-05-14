@@ -33,6 +33,11 @@ fs.writeFile("./public/widget.json", JSON.stringify(json, null, 4), (err) => {
     console.log("widget.json 创建失败", err);
   }
 });
+fs.writeFile("./widget.json", JSON.stringify(json, null, 4), (err) => {
+  if (err) {
+    console.log("widget.json 创建失败", err);
+  }
+});
 //  copy files
 ["./preview.png", "./README.md", "./icon.png"].forEach((path) => {
   fs.copyFile(path, join("./public", path), (err) => {
