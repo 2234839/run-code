@@ -5,7 +5,8 @@ import fs from "fs";
 const json = {
   name: pkg.name,
   author: pkg.author,
-  url: pkg.repository.url,
+  /** 思源挂件市场要求 url 不带 `.git` 后缀，这里在生成边界统一剥离，与 package.json 的 npm 习惯解耦 */
+  url: pkg.repository.url.replace(/\.git$/, ""),
   version: pkg.version,
   minAppVersion: "2.8.8",
   displayName: {
