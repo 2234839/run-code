@@ -1,8 +1,8 @@
 {
     "name": "run-code",
     "author": "崮生",
-    "url": "https://github.com/2234839/run-code.git",
-    "version": "v1.1.11",
+    "url": "https://github.com/2234839/run-code",
+    "version": "1.1.12",
     "minAppVersion": "2.8.8",
     "displayName": {
         "default": "",
